@@ -191,7 +191,7 @@ void PlayScene::Start()
 
 	m_pStarship = new Starship();
 	m_pStarship->GetTransform()->position = glm::vec2(150.0f, 300.0f);
-	AddChild(m_pStarship);
+	AddChild(m_pStarship, 2);
 
 	// Add Obstacles
 	BuildObstaclePool();

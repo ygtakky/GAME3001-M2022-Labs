@@ -16,10 +16,11 @@ Starship::Starship() : m_maxSpeed(20.0f),
 	GetRigidBody()->acceleration = glm::vec2(0, 0);
 	GetRigidBody()->isColliding = false;
 	SetCurrentHeading(0.0f); // current facing angle
-	SetLOSDistance(300.0f);
+	SetLOSDistance(400.0f);
 	SetWhiskerAngle(45.0f);
+	SetLOSColour(glm::vec4(1, 0, 0, 1)); // Red Colour Default
 
-	SetType(GameObjectType::STAR_SHIP);
+	SetType(GameObjectType::AGENT);
 }
 
 Starship::~Starship()
@@ -29,6 +30,10 @@ void Starship::Draw()
 {
 	// draw the target
 	TextureManager::Instance().Draw("starship", GetTransform()->position, GetCurrentHeading(), 255, true);
+
+	// draw the LOS line
+	Util::DrawLine(GetTransform()->position, 
+		GetTransform()->position + GetCurrentDirection() * GetLOSDistance(), GetLOSColour());
 }
 
 void Starship::Update()
