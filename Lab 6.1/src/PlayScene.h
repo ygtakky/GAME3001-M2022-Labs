@@ -44,7 +44,6 @@ private:
 	void m_buildGrid();
 	void m_toggleGrid(bool state);
 	void m_checkShipLOS(DisplayObject* target_object) const;
-	void m_storeObstacles();
 	void m_clearNodes();
 };
 
