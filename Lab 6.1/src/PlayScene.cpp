@@ -21,6 +21,14 @@ PlayScene::~PlayScene()
 void PlayScene::Draw()
 {
 	DrawDisplayList();
+
+	for (auto obstacle : m_pObstacles)
+	{
+		Util::DrawRect(
+	obstacle->GetTransform()->position - glm::vec2(obstacle->GetWidth() * 0.5f, obstacle->GetHeight() * 0.5f)
+			, obstacle->GetWidth(), obstacle->GetHeight());
+	}
+
 	SDL_SetRenderDrawColor(Renderer::Instance().GetRenderer(), 255, 255, 255, 255);
 }
 
@@ -157,10 +165,53 @@ void PlayScene::BuildObstaclePool()
 
 void PlayScene::m_buildGrid()
 {
+	const auto tile_size = Config::TILE_SIZE;
+	auto offset = glm::vec2(Config::TILE_SIZE * 0.5f, Config::TILE_SIZE * 0.5f);
+
+	m_clearNodes(); // we will need to clear nodes because we will rebuild/redraw the grid if we move an obstacle
+
+	// lay out a grid of path_nodes
+	for (int row = 0; row < Config::ROW_NUM; ++row)
+	{
+		for (int col = 0; col < Config::COL_NUM; ++col)
+		{
+			PathNode* path_node = new PathNode();
+			path_node->GetTransform()->position = glm::vec2(static_cast<float>(col) * tile_size + offset.x, 
+				static_cast<float>(row) * tile_size + offset.y);
+
+			// only show grid where there are no obstacles
+			bool keep_node = true;
+			for (auto obstacle : m_pObstacles)
+			{
+				// determine which path_nodes to keep
+				if(CollisionManager::AABBCheck(path_node, obstacle))
+				{
+					keep_node = false;
+				}
+			}
+			if(keep_node)
+			{
+				AddChild(path_node);
+				m_pGrid.push_back(path_node);
+			}
+			else
+			{
+				delete path_node;
+			}
+		}
+	}
+
+	// if Grid is supposed to be hidden - make it so!
+	m_toggleGrid(m_isGridEnabled);
+
 }
 
-void PlayScene::m_toggleGrid(bool state)
+void PlayScene::m_toggleGrid(const bool state)
 {
+	for (auto path_node : m_pGrid)
+	{
+		path_node->SetVisible(state);
+	}
 }
 
 void PlayScene::m_checkShipLOS(DisplayObject* target_object) const
@@ -173,6 +224,14 @@ void PlayScene::m_storeObstacles()
 
 void PlayScene::m_clearNodes()
 {
+	m_pGrid.clear();
+	for (auto display_object : GetDisplayList())
+	{
+		if(display_object->GetType() == GameObjectType::PATH_NODE)
+		{
+			RemoveChild(display_object);
+		}
+	}
 }
 
 
@@ -206,6 +265,11 @@ void PlayScene::Start()
 
 	m_pObstacles[2]->GetTransform()->position = glm::vec2(380.0f, 480.0f);
 	AddChild(m_pObstacles[2]);
+
+	// Setup the Grid
+	m_isGridEnabled = false;
+	m_buildGrid();
+	m_toggleGrid(m_isGridEnabled);
 
 	// preload sounds
 	SoundManager::Instance().Load("../Assets/audio/yay.ogg", "yay", SoundType::SOUND_SFX);
