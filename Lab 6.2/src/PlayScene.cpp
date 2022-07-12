@@ -2,13 +2,17 @@
 #include "Game.h"
 #include "EventManager.h"
 #include "InputType.h"
-#include "Renderer.h"
-#include "Util.h"
-#include "PathNode.h"
 
 // required for IMGUI
 #include "imgui.h"
 #include "imgui_sdl.h"
+
+// required for Scene
+#include "Renderer.h"
+#include "Util.h"
+#include "PathNode.h"
+#include "Config.h"
+#include <fstream>
 
 PlayScene::PlayScene()
 {
@@ -22,11 +26,14 @@ void PlayScene::Draw()
 {
 	DrawDisplayList();
 
-	// draws the collision bounds of each obstacle
-	for (auto obstacle : m_pObstacles)
+	if(m_isGridEnabled)
 	{
-		auto offset = glm::vec2(obstacle->GetWidth() * 0.5f, obstacle->GetHeight() * 0.5f);
-		Util::DrawRect(obstacle->GetTransform()->position - offset, obstacle->GetWidth(), obstacle->GetHeight());
+		// draws the collision bounds of each obstacle
+		for (const auto obstacle : m_pObstacles)
+		{
+			auto offset = glm::vec2(obstacle->GetWidth() * 0.5f, obstacle->GetHeight() * 0.5f);
+			Util::DrawRect(obstacle->GetTransform()->position - offset, obstacle->GetWidth(), obstacle->GetHeight());
+		}
 	}
 
 	SDL_SetRenderDrawColor(Renderer::Instance().GetRenderer(), 255, 255, 255, 255);
@@ -35,7 +42,19 @@ void PlayScene::Draw()
 void PlayScene::Update()
 {
 	UpdateDisplayList();
-	m_checkShipLOS(m_pTarget);
+	m_checkAgentLOS(m_pStarship, m_pTarget);
+	switch(m_LOSMode)
+	{
+	case 0:
+		m_checkAllNodesWithTarget(m_pTarget); // target
+		break;
+	case 1:
+		m_checkAllNodesWithTarget(m_pStarship); // starship
+		break;
+	case 2:
+		m_checkAllNodesWithBoth(); // both target and starship
+		break;
+	}
 }
 
 void PlayScene::Clean()
@@ -327,7 +346,12 @@ void PlayScene::m_clearNodes()
 void PlayScene::Start()
 {
 	// Set GUI Title
-	m_guiTitle = "Lab 6 - Part 1";
+	m_guiTitle = "Lab 6 - Part 2";
+
+	// Setup a few more fields
+	m_LOSMode = 0; // future enum
+	m_pathNodeLOSDistance = 1000; // 1000px distance
+	m_setPathNodeLOSDistance(m_pathNodeLOSDistance);
 
 	// Set Input Type
 	m_pCurrentInputType = static_cast<int>(InputType::KEYBOARD_MOUSE);
@@ -335,7 +359,7 @@ void PlayScene::Start()
 	// Add Game Objects
 	m_pTarget = new Target();
 	m_pTarget->GetTransform()->position = glm::vec2(600.0f, 300.0f);
-	AddChild(m_pTarget);
+	AddChild(m_pTarget, 2);
 
 	m_pStarship = new Starship();
 	m_pStarship->GetTransform()->position = glm::vec2(150.0f, 300.0f);
