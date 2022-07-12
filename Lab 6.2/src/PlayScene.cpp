@@ -245,6 +245,53 @@ void PlayScene::m_checkShipLOS(DisplayObject* target_object) const
 	}
 }
 
+bool PlayScene::m_checkAgentLOS(Agent* agent, DisplayObject* target_object)
+{
+	bool has_LOS = false; // default - no LOS
+	agent->SetHasLOS(has_LOS);
+	glm::vec4 LOSColour;
+
+	// if ship to target distance is less than or equal to the LOS Distance (Range)
+	const auto agent_to_range = Util::GetClosestEdge(agent->GetTransform()->position, target_object);
+	if (agent_to_range <= agent->GetLOSDistance())
+	{
+		// we are in range
+		std::vector<DisplayObject*> contact_list;
+		for (auto display_object : GetDisplayList())
+		{
+			const auto agent_to_object_distance = Util::GetClosestEdge(agent->GetTransform()->position, display_object);
+			if (agent_to_object_distance > agent_to_range) { continue; } // target is out of range
+			if((display_object->GetType() != GameObjectType::AGENT) && (display_object->GetType() != GameObjectType::PATH_NODE) && (display_object->GetType() != GameObjectType::TARGET))
+			{
+				contact_list.push_back(display_object);
+			}
+		}
+
+		const glm::vec2 agent_LOS_end_point = agent->GetTransform()->position + agent->GetCurrentDirection() * agent->GetLOSDistance();
+		has_LOS = CollisionManager::LOSCheck(agent, agent_LOS_end_point, contact_list, target_object);
+
+		LOSColour = (target_object->GetType() == GameObjectType::AGENT) ? glm::vec4(0, 0, 1, 1) : glm::vec4(0, 1, 0, 1);
+		agent->SetHasLOS(has_LOS, LOSColour);
+	}
+	return has_LOS;
+}
+
+bool PlayScene::m_checkPathNodeLOS(PathNode* path_node, DisplayObject* target_object)
+{
+}
+
+void PlayScene::m_checkAllNodesWithTarget(DisplayObject* target_object)
+{
+}
+
+void PlayScene::m_checkAllNodesWithBoth()
+{
+}
+
+void PlayScene::m_setPathNodeLOSDistance(int dist)
+{
+}
+
 void PlayScene::m_clearNodes()
 {
 	m_pGrid.clear();
