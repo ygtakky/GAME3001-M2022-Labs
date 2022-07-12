@@ -213,6 +213,7 @@
     <ClInclude Include="..\src\Heuristic.h" />
     <ClInclude Include="..\src\ImGuiWindowFrame.h" />
     <ClInclude Include="..\src\InputType.h" />
+    <ClInclude Include="..\src\LOSMode.h" />
     <ClInclude Include="..\src\Megaman.h" />
     <ClInclude Include="..\src\NavigationObject.h" />
     <ClInclude Include="..\src\NodeRecord.h" />

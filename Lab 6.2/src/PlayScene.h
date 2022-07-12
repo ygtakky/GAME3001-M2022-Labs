@@ -7,7 +7,7 @@
 #include "PathNode.h"
 #include "Starship.h"
 #include "Target.h"
-
+#include "LOSMode.h"
 
 class PlayScene : public Scene
 {
@@ -49,7 +49,7 @@ private:
 	void m_checkAllNodesWithTarget(DisplayObject* target_object);
 	void m_checkAllNodesWithBoth();
 	void m_setPathNodeLOSDistance(int dist);
-	int m_LOSMode; // 0 = nodes visible to target, 1 = nodes visible to the player, 2 = nodes visible to both
+	LOSMode m_LOSMode;
 
 	void m_clearNodes();
 	int m_pathNodeLOSDistance;

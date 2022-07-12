@@ -45,14 +45,14 @@ void PlayScene::Update()
 	m_checkAgentLOS(m_pStarship, m_pTarget);
 	switch(m_LOSMode)
 	{
-	case 0:
-		m_checkAllNodesWithTarget(m_pTarget); // target
+	case LOSMode::TARGET:
+		m_checkAllNodesWithTarget(m_pTarget);
 		break;
-	case 1:
-		m_checkAllNodesWithTarget(m_pStarship); // starship
+	case LOSMode::SHIP:
+		m_checkAllNodesWithTarget(m_pStarship); 
 		break;
-	case 2:
-		m_checkAllNodesWithBoth(); // both target and starship
+	case LOSMode::BOTH:
+		m_checkAllNodesWithBoth(); 
 		break;
 	}
 }
@@ -329,7 +329,7 @@ void PlayScene::Start()
 	m_guiTitle = "Lab 6 - Part 2";
 
 	// Setup a few more fields
-	m_LOSMode = 0; // future enum
+	m_LOSMode = LOSMode::TARGET;
 	m_pathNodeLOSDistance = 1000; // 1000px distance
 	m_setPathNodeLOSDistance(m_pathNodeLOSDistance);
 
@@ -388,10 +388,10 @@ void PlayScene::GUI_Function()
 
 	if(ImGui::Button("Node LOS to Target", {300, 20}))
 	{
-		m_LOSMode = 0;
+		m_LOSMode = LOSMode::TARGET;
 	}
 
-	if(m_LOSMode == 0)
+	if(m_LOSMode == LOSMode::TARGET)
 	{
 		ImGui::SameLine();
 		ImGui::Text("<Active>");
@@ -399,10 +399,10 @@ void PlayScene::GUI_Function()
 
 	if (ImGui::Button("Node LOS to StarShip", { 300, 20 }))
 	{
-		m_LOSMode = 1;
+		m_LOSMode = LOSMode::SHIP;
 	}
 
-	if (m_LOSMode == 1)
+	if (m_LOSMode == LOSMode::SHIP)
 	{
 		ImGui::SameLine();
 		ImGui::Text("<Active>");
@@ -410,10 +410,10 @@ void PlayScene::GUI_Function()
 
 	if (ImGui::Button("Node LOS to Both", { 300, 20 }))
 	{
-		m_LOSMode = 2;
+		m_LOSMode = LOSMode::BOTH;
 	}
 
-	if (m_LOSMode == 2)
+	if (m_LOSMode == LOSMode::BOTH)
 	{
 		ImGui::SameLine();
 		ImGui::Text("<Active>");

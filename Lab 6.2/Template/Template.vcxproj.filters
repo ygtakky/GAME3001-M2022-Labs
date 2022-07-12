@@ -335,6 +335,9 @@
     <ClInclude Include="..\src\PathNode.h">
       <Filter>Pathfinding</Filter>
     </ClInclude>
+    <ClInclude Include="..\src\LOSMode.h">
+      <Filter>Enums</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\README.md">
