@@ -43,8 +43,17 @@ private:
 	std::vector<PathNode*> m_pGrid;
 	void m_buildGrid();
 	void m_toggleGrid(bool state);
-	void m_checkShipLOS(DisplayObject* target_object) const;
+	void m_checkShipLOS(DisplayObject* target_object) const; // TODO: need to delete this one
+
+	bool m_checkAgentLOS(Agent* agent, DisplayObject* target_object);
+	bool m_checkPathNodeLOS(PathNode* path_node, DisplayObject* target_object);
+	void m_checkAllNodesWithTarget(DisplayObject* target_object);
+	void m_checkAllNodesWithBoth();
+	void m_setPathNodeLOSDistance(int dist);
+	int m_LOSMode; // 0 = nodes visible to target, 1 = nodes visible to the player, 2 = nodes visible to both
+
 	void m_clearNodes();
+	int m_pathNodeLOSDistance;
 };
 
 #endif /* defined (__PLAY_SCENE__) */
