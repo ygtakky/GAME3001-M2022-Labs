@@ -278,6 +278,11 @@ bool PlayScene::m_checkAgentLOS(Agent* agent, DisplayObject* target_object)
 
 bool PlayScene::m_checkPathNodeLOS(PathNode* path_node, DisplayObject* target_object)
 {
+	// check angle to the target so we can still use LOS distance for path_nodes
+	const auto target_direction = target_object->GetTransform()->position - path_node->GetTransform()->position;
+	const auto normalized_direction = Util::Normalize(target_direction); // changes direction to a unit vector (length of 1)
+	path_node->SetCurrentDirection(normalized_direction);
+	return m_checkAgentLOS(path_node, target_object);
 }
 
 void PlayScene::m_checkAllNodesWithTarget(DisplayObject* target_object)
