@@ -386,38 +386,15 @@ void PlayScene::GUI_Function()
 
 	ImGui::Separator();
 
-	if(ImGui::Button("Node LOS to Target", {300, 20}))
-	{
-		m_LOSMode = LOSMode::TARGET;
-	}
+	static int LOS_mode = static_cast<int>(m_LOSMode);
+	ImGui::Text("Path Node LOS");
+	ImGui::RadioButton("Target", &LOS_mode, static_cast<int>(LOSMode::TARGET)); ImGui::SameLine();
+	ImGui::RadioButton("StarShip", &LOS_mode, static_cast<int>(LOSMode::SHIP)); ImGui::SameLine();
+	ImGui::RadioButton("Both Target & StarShip", &LOS_mode, static_cast<int>(LOSMode::BOTH)); 
+	
+	m_LOSMode = static_cast<LOSMode>(LOS_mode);
 
-	if(m_LOSMode == LOSMode::TARGET)
-	{
-		ImGui::SameLine();
-		ImGui::Text("<Active>");
-	}
-
-	if (ImGui::Button("Node LOS to StarShip", { 300, 20 }))
-	{
-		m_LOSMode = LOSMode::SHIP;
-	}
-
-	if (m_LOSMode == LOSMode::SHIP)
-	{
-		ImGui::SameLine();
-		ImGui::Text("<Active>");
-	}
-
-	if (ImGui::Button("Node LOS to Both", { 300, 20 }))
-	{
-		m_LOSMode = LOSMode::BOTH;
-	}
-
-	if (m_LOSMode == LOSMode::BOTH)
-	{
-		ImGui::SameLine();
-		ImGui::Text("<Active>");
-	}
+	ImGui::Separator();
 
 	if(ImGui::SliderInt("Path Node LOS Distance", &m_pathNodeLOSDistance, 0, 1000))
 	{
