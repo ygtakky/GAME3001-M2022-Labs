@@ -43,7 +43,6 @@ private:
 	std::vector<PathNode*> m_pGrid;
 	void m_buildGrid();
 	void m_toggleGrid(bool state);
-	void m_checkShipLOS(DisplayObject* target_object) const; // TODO: need to delete this one
 
 	bool m_checkAgentLOS(Agent* agent, DisplayObject* target_object);
 	bool m_checkPathNodeLOS(PathNode* path_node, DisplayObject* target_object);

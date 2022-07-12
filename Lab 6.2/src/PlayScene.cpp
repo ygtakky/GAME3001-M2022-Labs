@@ -233,37 +233,6 @@ void PlayScene::m_toggleGrid(const bool state)
 	}
 }
 
-void PlayScene::m_checkShipLOS(DisplayObject* target_object) const
-{
-	m_pStarship->SetHasLOS(false); // default - no LOS
-
-	// if ship to target distance is less than or equal to the LOS Distance (Range)
-	const auto ship_to_range = Util::GetClosestEdge(m_pStarship->GetTransform()->position, target_object);
-	if(ship_to_range <= m_pStarship->GetLOSDistance())
-	{
-		// we are in range
-		std::vector<DisplayObject*> contact_list;
-		for (auto display_object : GetDisplayList())
-		{
-			if (display_object->GetType() == GameObjectType::PATH_NODE) { continue;  } // ignore these
-			if ((display_object->GetType() != m_pStarship->GetType()) && (display_object->GetType() != target_object->GetType()))
-			{
-				// check if the displayobject is closer to the starship than the target
-				const auto ship_to_object_distance = Util::GetClosestEdge(m_pStarship->GetTransform()->position, display_object);
-				if(ship_to_object_distance <= ship_to_range)
-				{
-					contact_list.push_back(display_object);
-				}
-			}
-		}
-
-		const auto has_LOS = CollisionManager::LOSCheck(m_pStarship,
-			m_pStarship->GetTransform()->position + m_pStarship->GetCurrentDirection() * m_pStarship->GetLOSDistance(),
-			contact_list, target_object);
-		m_pStarship->SetHasLOS(has_LOS);
-	}
-}
-
 bool PlayScene::m_checkAgentLOS(Agent* agent, DisplayObject* target_object)
 {
 	bool has_LOS = false; // default - no LOS
@@ -413,6 +382,46 @@ void PlayScene::GUI_Function()
 	if (ImGui::Checkbox("Toggle Grid", &m_isGridEnabled))
 	{
 		m_toggleGrid(m_isGridEnabled);
+	}
+
+	ImGui::Separator();
+
+	if(ImGui::Button("Node LOS to Target", {300, 20}))
+	{
+		m_LOSMode = 0;
+	}
+
+	if(m_LOSMode == 0)
+	{
+		ImGui::SameLine();
+		ImGui::Text("<Active>");
+	}
+
+	if (ImGui::Button("Node LOS to StarShip", { 300, 20 }))
+	{
+		m_LOSMode = 1;
+	}
+
+	if (m_LOSMode == 1)
+	{
+		ImGui::SameLine();
+		ImGui::Text("<Active>");
+	}
+
+	if (ImGui::Button("Node LOS to Both", { 300, 20 }))
+	{
+		m_LOSMode = 2;
+	}
+
+	if (m_LOSMode == 2)
+	{
+		ImGui::SameLine();
+		ImGui::Text("<Active>");
+	}
+
+	if(ImGui::SliderInt("Path Node LOS Distance", &m_pathNodeLOSDistance, 0, 1000))
+	{
+		m_setPathNodeLOSDistance(m_pathNodeLOSDistance);
 	}
 
 	ImGui::Separator();
