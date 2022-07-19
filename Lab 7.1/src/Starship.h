@@ -38,6 +38,12 @@ private:
 	float m_accelerationRate;
 	glm::vec2 m_startPos;
 
+	// New for Lab 7
+	std::vector<glm::vec2> m_patrolPath;
+	int m_wayPoint;
+
+	void BuildPatrolPath();
+
 	void Move();
 	void CheckBounds();
 };
