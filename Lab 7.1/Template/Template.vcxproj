@@ -205,6 +205,7 @@
     <ClInclude Include="..\include\IMGUI\imstb_textedit.h" />
     <ClInclude Include="..\include\IMGUI\imstb_truetype.h" />
     <ClInclude Include="..\include\IMGUI_SDL\imgui_sdl.h" />
+    <ClInclude Include="..\src\ActionNode.h" />
     <ClInclude Include="..\src\ActionState.h" />
     <ClInclude Include="..\src\Agent.h" />
     <ClInclude Include="..\src\Animation.h" />
@@ -212,6 +213,7 @@
     <ClInclude Include="..\src\Button.h" />
     <ClInclude Include="..\src\CollisionManager.h" />
     <ClInclude Include="..\src\CollisionShape.h" />
+    <ClInclude Include="..\src\ConditionNode.h" />
     <ClInclude Include="..\src\Config.h" />
     <ClInclude Include="..\src\Heuristic.h" />
     <ClInclude Include="..\src\ImGuiWindowFrame.h" />
@@ -229,6 +231,7 @@
     <ClInclude Include="..\src\TileNeighbour.h" />
     <ClInclude Include="..\src\TileStatus.h" />
     <ClInclude Include="..\src\TileType.h" />
+    <ClInclude Include="..\src\TreeNode.h" />
     <ClInclude Include="..\src\TreeNodeType.h" />
     <ClInclude Include="..\src\UIControl.h" />
     <ClInclude Include="..\src\DisplayObject.h" />
