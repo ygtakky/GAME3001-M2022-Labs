@@ -1,16 +1,16 @@
 #pragma once
-#ifndef __PATROL_ACTION__
-#define __PATROL_ACTION__
+#ifndef __MOVE_TO_PLAYER_ACTION__
+#define __MOVE_TO_PLAYER_ACTION__
 
 #include "ActionNode.h"
 
-class PatrolAction : public ActionNode
+class MoveToPlayerAction : public ActionNode
 {
 public:
-	PatrolAction();
-	virtual ~PatrolAction();
+	MoveToPlayerAction();
+	virtual ~MoveToPlayerAction();
 
 	virtual void Action() override; // Define here
 };
 
-#endif /* defined  (__PATROL_ACTION__) */
+#endif /* defined  (__MOVE_TO_PLAYER_ACTION__) */

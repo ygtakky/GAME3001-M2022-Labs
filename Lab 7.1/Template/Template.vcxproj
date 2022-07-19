@@ -166,8 +166,10 @@
     <ClCompile Include="..\src\AttackAction.cpp" />
     <ClCompile Include="..\src\Background.cpp" />
     <ClCompile Include="..\src\Button.cpp" />
+    <ClCompile Include="..\src\CloseCombatCondition.cpp" />
     <ClCompile Include="..\src\CollisionManager.cpp" />
     <ClCompile Include="..\src\ImGuiWindowFrame.cpp" />
+    <ClCompile Include="..\src\LOSCondition.cpp" />
     <ClCompile Include="..\src\Megaman.cpp" />
     <ClCompile Include="..\src\MoveToLOSAction.cpp" />
     <ClCompile Include="..\src\MoveToPlayerAction.cpp" />
@@ -176,6 +178,7 @@
     <ClCompile Include="..\src\PathConnection.cpp" />
     <ClCompile Include="..\src\PathNode.cpp" />
     <ClCompile Include="..\src\PatrolAction.cpp" />
+    <ClCompile Include="..\src\RadiusCondition.cpp" />
     <ClCompile Include="..\src\Sprite.cpp" />
     <ClCompile Include="..\src\Starship.cpp" />
     <ClCompile Include="..\src\UIControl.cpp" />
@@ -216,6 +219,7 @@
     <ClInclude Include="..\src\AttackAction.h" />
     <ClInclude Include="..\src\Background.h" />
     <ClInclude Include="..\src\Button.h" />
+    <ClInclude Include="..\src\CloseCombatCondition.h" />
     <ClInclude Include="..\src\CollisionManager.h" />
     <ClInclude Include="..\src\CollisionShape.h" />
     <ClInclude Include="..\src\ConditionNode.h" />
@@ -223,6 +227,7 @@
     <ClInclude Include="..\src\Heuristic.h" />
     <ClInclude Include="..\src\ImGuiWindowFrame.h" />
     <ClInclude Include="..\src\InputType.h" />
+    <ClInclude Include="..\src\LOSCondition.h" />
     <ClInclude Include="..\src\LOSMode.h" />
     <ClInclude Include="..\src\Megaman.h" />
     <ClInclude Include="..\src\MoveToLOSAction.h" />
@@ -233,6 +238,7 @@
     <ClInclude Include="..\src\PathConnection.h" />
     <ClInclude Include="..\src\PathNode.h" />
     <ClInclude Include="..\src\PatrolAction.h" />
+    <ClInclude Include="..\src\RadiusCondition.h" />
     <ClInclude Include="..\src\SoundType.h" />
     <ClInclude Include="..\src\Sprite.h" />
     <ClInclude Include="..\src\Starship.h" />
