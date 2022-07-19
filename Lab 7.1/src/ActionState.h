@@ -1,7 +1,7 @@
 #pragma once
 #ifndef __ACTION_STATE__
 #define __ACTION_STATE__
-enum ActionState
+enum class ActionState
 {
 	NO_ACTION = -1,
 	ATTACK,
