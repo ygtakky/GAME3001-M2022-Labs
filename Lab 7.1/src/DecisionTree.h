@@ -25,24 +25,24 @@ public:
 	[[nodiscard]] Agent* GetAgent() const;
 	void SetAgent(Agent* agent);
 
-	LOSCondition* GetLOSNode() const;
-	RadiusCondition* GetRadiusNode() const;
-	CloseCombatCondition* GetCloseCombatNode() const;
+	[[nodiscard]] LOSCondition* GetLOSNode() const;
+	[[nodiscard]] RadiusCondition* GetRadiusNode() const;
+	[[nodiscard]] CloseCombatCondition* GetCloseCombatNode() const;
 
 	// Public Utility / Convenience Methods
 	TreeNode* AddNode(TreeNode* parent, TreeNode* child_node, TreeNodeType type);
-	void Display();
+	void Display() const;
 	void Update();
 	void Clean();
 
-	void MakeDecision(); // in-order traversal
+	void MakeDecision() const; // in-order traversal
 
 private:
 	// Private Data Members (Fields)
-	Agent* m_agent;
-	LOSCondition* m_LOSNode;
-	RadiusCondition* m_RadiusNode;
-	CloseCombatCondition* m_CloseCombatNode;
+	Agent* m_agent{};
+	LOSCondition* m_LOSNode{};
+	RadiusCondition* m_RadiusNode{};
+	CloseCombatCondition* m_CloseCombatNode{};
 
 	// TreeNode List
 	std::vector<TreeNode*> m_treeNodeList;

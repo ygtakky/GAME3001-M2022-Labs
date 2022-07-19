@@ -64,10 +64,13 @@ TreeNode* DecisionTree::AddNode(TreeNode* parent, TreeNode* child_node, const Tr
 
 void DecisionTree::Display() const
 {
+	std::cout << "Decision Tree Nodes: " << std::endl;
+	std::cout << "-----------------------------------" << std::endl;
 	for (const auto node : m_treeNodeList)
 	{
 		std::cout << node->m_name << std::endl;
 	}
+	std::cout << "-----------------------------------" << std::endl;
 }
 
 void DecisionTree::Update()

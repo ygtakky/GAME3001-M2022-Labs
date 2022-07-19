@@ -4,7 +4,7 @@
 
 MoveToPlayerAction::MoveToPlayerAction()
 {
-	m_name = "Patrol Action";
+	m_name = "Move To Player Action";
 }
 
 MoveToPlayerAction::~MoveToPlayerAction()
