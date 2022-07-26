@@ -17,4 +17,5 @@ void MoveToLOSAction::Action()
 		std::cout << "Performing " << m_name << std::endl;
 		GetAgent()->SetActionState(ActionState::MOVE_TO_LOS);
 	}
+	GetAgent()->MoveToLOS();
 }

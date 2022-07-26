@@ -17,4 +17,5 @@ void AttackAction::Action()
 		std::cout << "Performing " << m_name << std::endl;
 		GetAgent()->SetActionState(ActionState::ATTACK);
 	}
+	GetAgent()->Attack();
 }
