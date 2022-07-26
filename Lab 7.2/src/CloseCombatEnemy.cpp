@@ -24,9 +24,8 @@ CloseCombatEnemy::CloseCombatEnemy() : m_maxSpeed(20.0f),
 
 	SetCurrentHeading(0.0f); // current facing angle
 	SetCurrentDirection(glm::vec2(1.0f, 0.0f)); // facing right
-	SetLOSDistance(400.0f);
-	SetWhiskerAngle(45.0f);
 
+	SetLOSDistance(400.0f);
 	SetLOSColour(glm::vec4(1, 0, 0, 1)); // default LOS colour is Red
 	
 	SetType(GameObjectType::AGENT);
@@ -34,6 +33,11 @@ CloseCombatEnemy::CloseCombatEnemy() : m_maxSpeed(20.0f),
 	// New for Lab 7
 	SetActionState(ActionState::NO_ACTION);
 	BuildPatrolPath();
+
+	// New for Lab 7 part 2
+	m_tree = new DecisionTree(this); // Create a new Tree
+	m_buildTree();
+	m_tree->Display(); // optional
 }
 
 CloseCombatEnemy::~CloseCombatEnemy()
@@ -56,7 +60,8 @@ void CloseCombatEnemy::Draw()
 
 void CloseCombatEnemy::Update()
 {
-	
+	// Determine which action to perform
+	m_tree->MakeDecision();
 }
 
 void CloseCombatEnemy::Clean()
@@ -200,6 +205,7 @@ void CloseCombatEnemy::Patrol()
 		// Initialize
 		SetActionState(ActionState::PATROL);
 	}
+	Move();
 }
 
 void CloseCombatEnemy::MoveToPlayer()

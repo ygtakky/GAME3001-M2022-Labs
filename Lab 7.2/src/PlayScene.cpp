@@ -42,14 +42,16 @@ void PlayScene::Draw()
 void PlayScene::Update()
 {
 	UpdateDisplayList();
-	m_checkAgentLOS(m_pStarship, m_pTarget);
+
+	m_pStarShip->GetTree()->GetLOSNode()->SetLOS(m_pStarShip->CheckAgentLOSToTarget(m_pStarShip, m_pTarget, m_pObstacles));
+
 	switch(m_LOSMode)
 	{
 	case LOSMode::TARGET:
 		m_checkAllNodesWithTarget(m_pTarget);
 		break;
 	case LOSMode::SHIP:
-		m_checkAllNodesWithTarget(m_pStarship); 
+		m_checkAllNodesWithTarget(m_pStarShip); 
 		break;
 	case LOSMode::BOTH:
 		m_checkAllNodesWithBoth(); 
@@ -297,7 +299,7 @@ void PlayScene::m_checkAllNodesWithBoth() const
 {
 	for (const auto path_node : m_pGrid)
 	{
-		const bool LOSWithStarShip = m_checkPathNodeLOS(path_node, m_pStarship);
+		const bool LOSWithStarShip = m_checkPathNodeLOS(path_node, m_pStarShip);
 		const bool LOSWithTarget = m_checkPathNodeLOS(path_node, m_pTarget);
 		path_node->SetHasLOS(LOSWithStarShip && LOSWithTarget, glm::vec4(0, 1, 1, 1));
 	}
@@ -326,7 +328,7 @@ void PlayScene::m_clearNodes()
 void PlayScene::Start()
 {
 	// Set GUI Title
-	m_guiTitle = "Lab 7 - Part 1";
+	m_guiTitle = "Lab 7 - Part 2";
 
 	// Setup a few more fields
 	m_LOSMode = LOSMode::TARGET;
@@ -344,9 +346,9 @@ void PlayScene::Start()
 	m_pTarget->GetTransform()->position = glm::vec2(500.0f, 300.0f);
 	AddChild(m_pTarget, 3);
 
-	m_pStarship = new Starship();
-	m_pStarship->GetTransform()->position = glm::vec2(400.0f, 40.0f);
-	AddChild(m_pStarship, 4);
+	m_pStarShip = new CloseCombatEnemy();
+	m_pStarShip->GetTransform()->position = glm::vec2(400.0f, 40.0f);
+	AddChild(m_pStarShip, 4);
 
 	// Add Obstacles
 	BuildObstaclePool();
@@ -361,11 +363,11 @@ void PlayScene::Start()
 	SoundManager::Instance().Load("../Assets/audio/thunder.ogg", "thunder", SoundType::SOUND_SFX);
 
 	// Pre-load Music
-	SoundManager::Instance().Load("../Assets/audio/mutara.mp3", "mutara", SoundType::SOUND_MUSIC);
+	SoundManager::Instance().Load("../Assets/audio/Klingon.mp3", "klingon", SoundType::SOUND_MUSIC);
 	SoundManager::Instance().SetMusicVolume(16);
 
 	// Play Music
-	SoundManager::Instance().PlayMusic("mutara");
+	SoundManager::Instance().PlayMusic("klingon");
 
 	/* DO NOT REMOVE */
 	ImGuiWindowFrame::Instance().SetGuiFunction([this] { GUI_Function(); });
@@ -415,18 +417,18 @@ void PlayScene::GUI_Function()
 
 	// spaceship properties
 
-	static int shipPosition[] = { static_cast<int>(m_pStarship->GetTransform()->position.x), static_cast<int>(m_pStarship->GetTransform()->position.y)};
+	static int shipPosition[] = { static_cast<int>(m_pStarShip->GetTransform()->position.x), static_cast<int>(m_pStarShip->GetTransform()->position.y)};
 	if (ImGui::SliderInt2("Ship Position", shipPosition, 0, 800))
 	{
-		m_pStarship->GetTransform()->position.x = static_cast<float>(shipPosition[0]);
-		m_pStarship->GetTransform()->position.y = static_cast<float>(shipPosition[1]);
+		m_pStarShip->GetTransform()->position.x = static_cast<float>(shipPosition[0]);
+		m_pStarShip->GetTransform()->position.y = static_cast<float>(shipPosition[1]);
 	}
 
 	// allow the ship to rotate
 	static int angle;
 	if (ImGui::SliderInt("Ship Direction", &angle, -360, 360))
 	{
-		m_pStarship->SetCurrentHeading(static_cast<float>(angle));
+		m_pStarShip->SetCurrentHeading(static_cast<float>(angle));
 	}
 
 	// Target properties

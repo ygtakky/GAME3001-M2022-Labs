@@ -32,6 +32,11 @@ public:
 	void LookWhereIAmGoing(glm::vec2 target_direction);
 	void Reset();
 
+	// New for Lab 7 part 2
+	void Patrol() override;
+	void MoveToPlayer() override;
+	DecisionTree* GetTree() const;
+
 private:
 	float m_maxSpeed;
 	float m_turnRate;
