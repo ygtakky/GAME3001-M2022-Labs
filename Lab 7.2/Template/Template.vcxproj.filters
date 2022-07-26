@@ -204,6 +204,9 @@
     <ClCompile Include="..\src\MoveToRangeAction.cpp">
       <Filter>Decision\Actions</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\RangedCombatCondition.cpp">
+      <Filter>Decision\Conditions</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\StartScene.h">
@@ -433,6 +436,9 @@
     </ClInclude>
     <ClInclude Include="..\src\MoveToRangeAction.h">
       <Filter>Decision\Actions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\RangedCombatCondition.h">
+      <Filter>Decision\Conditions</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
