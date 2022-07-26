@@ -28,6 +28,15 @@ public:
 	[[nodiscard]] LOSCondition* GetLOSNode() const;
 	[[nodiscard]] RadiusCondition* GetRadiusNode() const;
 	[[nodiscard]] CloseCombatCondition* GetCloseCombatNode() const;
+	// RangedCombatCondition* GetRangedCombatNode() const;
+	std::vector<TreeNode*>& GetTree();
+
+	// New for Lab 7 Part 2
+	void SetLOSNode(LOSCondition* node);
+	void SetRadiusNode(RadiusCondition* node);
+	void SetCloseCombatNode(CloseCombatCondition* node);
+	//void SetRangedCombatNode(RangedCombatCondition* node);
+
 
 	// Public Utility / Convenience Methods
 	TreeNode* AddNode(TreeNode* parent, TreeNode* child_node, TreeNodeType type);
@@ -43,6 +52,8 @@ private:
 	LOSCondition* m_LOSNode{};
 	RadiusCondition* m_RadiusNode{};
 	CloseCombatCondition* m_CloseCombatNode{};
+	// new For Lab 7 part 2
+	// RangedCombatCondition* m_RangedCombatNode(){};
 
 	// TreeNode List
 	std::vector<TreeNode*> m_treeNodeList;

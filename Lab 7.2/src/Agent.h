@@ -58,7 +58,7 @@ public:
 
 	// new for Lab 7 part 2
 	// Utility function
-	bool CheckAgentLOSToTarget(Agent* agent, DisplayObject* target_object, std::vector<Obstacle*>& obstacles);
+	bool CheckAgentLOSToTarget(Agent* agent, DisplayObject* target_object, const std::vector<Obstacle*>& obstacles);
 	// Virtual functions
 	virtual void Attack(){}
 	virtual void MoveToLOS() {}
