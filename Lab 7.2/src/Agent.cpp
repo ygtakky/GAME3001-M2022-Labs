@@ -1,5 +1,6 @@
 #include "Agent.h"
 
+#include "CollisionManager.h"
 #include "Util.h"
 
 Agent::Agent(): m_currentHeading(0.0f), m_LOSDistance(0.0f),
@@ -155,6 +156,37 @@ void Agent::UpdateWhiskers(const float angle)
 void Agent::SetActionState(const ActionState state)
 {
 	m_state = state;
+}
+
+bool Agent::CheckAgentLOSToTarget(Agent* agent, DisplayObject* target_object, const std::vector<Obstacle*>& obstacles)
+{
+	bool has_LOS = false; // default - no LOS
+	SetHasLOS(has_LOS);
+
+	const auto target_direction = target_object->GetTransform()->position - GetTransform()->position;
+	const auto normalized_direction = Util::Normalize(target_direction); // points to the target - Vector of magnitude 1
+	SetMiddleLOSEndPoint(GetTransform()->position + normalized_direction * GetLOSDistance());
+
+	// if ship to target distance is less than or equal to the LOS Distance (Range)
+	const auto agent_to_range = Util::GetClosestEdge(GetTransform()->position, target_object);
+	if (agent_to_range <= GetLOSDistance())
+	{
+		// we are in range
+		std::vector<DisplayObject*> contact_list;
+		for (const auto obstacle : obstacles)
+		{
+			if (obstacle->GetType() == GameObjectType::NONE) { continue; }
+			const auto agent_to_object_distance = Util::GetClosestEdge(GetTransform()->position, obstacle);
+			if (agent_to_object_distance > agent_to_range) { continue; } // target is out of range
+
+			contact_list.push_back(obstacle);
+		}
+
+		has_LOS = CollisionManager::LOSCheck(agent, GetMiddleLOSEndPoint(), contact_list, target_object);
+	}
+	agent->SetHasLOS(has_LOS);
+
+	return has_LOS;
 }
 
 void Agent::ChangeDirection()

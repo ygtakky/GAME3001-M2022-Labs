@@ -427,7 +427,6 @@
     <None Include="..\README.md">
       <Filter>DOCS</Filter>
     </None>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Assets\data\level.txt">
