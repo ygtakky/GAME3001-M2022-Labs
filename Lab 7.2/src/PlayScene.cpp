@@ -347,8 +347,8 @@ void PlayScene::Start()
 	m_pTarget->GetTransform()->position = glm::vec2(500.0f, 300.0f);
 	AddChild(m_pTarget, 3);
 
-	//m_pStarShip = new CloseCombatEnemy();
-	m_pStarShip = new RangedCombatEnemy();
+	m_pStarShip = new CloseCombatEnemy();
+	//m_pStarShip = new RangedCombatEnemy();
 	m_pStarShip->GetTransform()->position = glm::vec2(400.0f, 40.0f);
 	AddChild(m_pStarShip, 4);
 
