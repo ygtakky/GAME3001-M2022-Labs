@@ -9,6 +9,7 @@
 #include "Target.h"
 #include "LOSMode.h"
 #include "CloseCombatEnemy.h"
+#include "RangedCombatEnemy.h"
 
 class PlayScene : public Scene
 {
@@ -40,8 +41,8 @@ private:
 	Background* m_pBackground;
 	Target* m_pTarget;
 	// New for Lab 7 Part 2
-	CloseCombatEnemy* m_pStarShip;
-	//RangedCombatEnemy* m_pStarShip;
+	//CloseCombatEnemy* m_pStarShip;
+	RangedCombatEnemy* m_pStarShip;
 	std::vector<Obstacle*> m_pObstacles;
 
 	void BuildObstaclePool();

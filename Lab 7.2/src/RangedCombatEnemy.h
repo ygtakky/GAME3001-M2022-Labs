@@ -1,15 +1,15 @@
 #pragma once
-#ifndef __CLOSE_COMBAT_ENEMY__
-#define __CLOSE_COMBAT_ENEMY__
+#ifndef __RANGED_COMBAT_ENEMY__
+#define __RANGED_COMBAT_ENEMY__
 
 #include "Agent.h"
 #include "DecisionTree.h"
 
-class CloseCombatEnemy final : public Agent
+class RangedCombatEnemy final : public Agent
 {
 public:
-	CloseCombatEnemy();
-	~CloseCombatEnemy() override;
+	RangedCombatEnemy();
+	~RangedCombatEnemy() override;
 
 	// Inherited via GameObject
 	virtual void Draw() override;
@@ -59,4 +59,4 @@ private:
 };
 
 
-#endif /* defined (__CLOSE_COMBAT_ENEMY__) */
+#endif /* defined (__RANGED_COMBAT_ENEMY__) */
