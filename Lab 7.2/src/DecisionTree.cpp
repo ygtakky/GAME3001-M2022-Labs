@@ -10,13 +10,13 @@
 
 DecisionTree::DecisionTree()
 {
-	m_buildTree();
+	//m_buildTree();
 }
 
 DecisionTree::DecisionTree(Agent* agent)
 {
 	m_agent = agent;
-	m_buildTree();
+	//m_buildTree();
 }
 
 DecisionTree::~DecisionTree()
@@ -108,39 +108,39 @@ void DecisionTree::MakeDecision() const
 	dynamic_cast<ActionNode*>(current_node)->Action();
 }
 
-void DecisionTree::m_buildTree()
-{
-	// Conditions
-
-	// Create and add the root node
-	m_LOSNode = new LOSCondition();
-	m_treeNodeList.push_back(m_LOSNode);
-
-	m_RadiusNode = new RadiusCondition();
-	AddNode(m_LOSNode, m_RadiusNode, TreeNodeType::LEFT_TREE_NODE);
-	m_treeNodeList.push_back(m_RadiusNode);
-
-	m_CloseCombatNode = new CloseCombatCondition();
-	AddNode(m_LOSNode, m_CloseCombatNode, TreeNodeType::RIGHT_TREE_NODE);
-	m_treeNodeList.push_back(m_CloseCombatNode);
-
-	// Actions
-
-	// Left Sub-Tree
-	TreeNode* patrolNode = AddNode(m_RadiusNode, new PatrolAction(), TreeNodeType::LEFT_TREE_NODE);
-	dynamic_cast<ActionNode*>(patrolNode)->SetAgent(m_agent);
-	m_treeNodeList.push_back(patrolNode);
-
-	TreeNode* moveToLOSNode = AddNode(m_RadiusNode, new MoveToLOSAction(), TreeNodeType::RIGHT_TREE_NODE);
-	dynamic_cast<ActionNode*>(moveToLOSNode)->SetAgent(m_agent);
-	m_treeNodeList.push_back(moveToLOSNode);
-
-	// Right Sub-Tree
-	TreeNode* moveToPlayerNode = AddNode(m_CloseCombatNode, new MoveToPlayerAction(), TreeNodeType::LEFT_TREE_NODE);
-	dynamic_cast<ActionNode*>(moveToPlayerNode)->SetAgent(m_agent);
-	m_treeNodeList.push_back(moveToPlayerNode);
-
-	TreeNode* attackNode = AddNode(m_CloseCombatNode, new AttackAction(), TreeNodeType::RIGHT_TREE_NODE);
-	dynamic_cast<ActionNode*>(attackNode)->SetAgent(m_agent);
-	m_treeNodeList.push_back(attackNode);
-}
+//void DecisionTree::m_buildTree()
+//{
+//	// Conditions
+//
+//	// Create and add the root node
+//	m_LOSNode = new LOSCondition();
+//	m_treeNodeList.push_back(m_LOSNode);
+//
+//	m_RadiusNode = new RadiusCondition();
+//	AddNode(m_LOSNode, m_RadiusNode, TreeNodeType::LEFT_TREE_NODE);
+//	m_treeNodeList.push_back(m_RadiusNode);
+//
+//	m_CloseCombatNode = new CloseCombatCondition();
+//	AddNode(m_LOSNode, m_CloseCombatNode, TreeNodeType::RIGHT_TREE_NODE);
+//	m_treeNodeList.push_back(m_CloseCombatNode);
+//
+//	// Actions
+//
+//	// Left Sub-Tree
+//	TreeNode* patrolNode = AddNode(m_RadiusNode, new PatrolAction(), TreeNodeType::LEFT_TREE_NODE);
+//	dynamic_cast<ActionNode*>(patrolNode)->SetAgent(m_agent);
+//	m_treeNodeList.push_back(patrolNode);
+//
+//	TreeNode* moveToLOSNode = AddNode(m_RadiusNode, new MoveToLOSAction(), TreeNodeType::RIGHT_TREE_NODE);
+//	dynamic_cast<ActionNode*>(moveToLOSNode)->SetAgent(m_agent);
+//	m_treeNodeList.push_back(moveToLOSNode);
+//
+//	// Right Sub-Tree
+//	TreeNode* moveToPlayerNode = AddNode(m_CloseCombatNode, new MoveToPlayerAction(), TreeNodeType::LEFT_TREE_NODE);
+//	dynamic_cast<ActionNode*>(moveToPlayerNode)->SetAgent(m_agent);
+//	m_treeNodeList.push_back(moveToPlayerNode);
+//
+//	TreeNode* attackNode = AddNode(m_CloseCombatNode, new AttackAction(), TreeNodeType::RIGHT_TREE_NODE);
+//	dynamic_cast<ActionNode*>(attackNode)->SetAgent(m_agent);
+//	m_treeNodeList.push_back(attackNode);
+//}

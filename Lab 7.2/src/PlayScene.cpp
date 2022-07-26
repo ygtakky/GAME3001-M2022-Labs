@@ -56,8 +56,6 @@ void PlayScene::Update()
 		break;
 	}
 
-	// Make a Decision
-	m_decisionTree->MakeDecision();
 }
 
 void PlayScene::Clean()
@@ -357,11 +355,6 @@ void PlayScene::Start()
 	m_isGridEnabled = false;
 	m_buildGrid();
 	m_toggleGrid(m_isGridEnabled);
-
-	// Create Decision Tree
-	m_decisionTree = new DecisionTree(m_pStarship); // using our overloaded constructor
-	m_decisionTree->Display(); // optional
-	m_decisionTree->MakeDecision(); // Patrol
 
 	// Pre-load sounds
 	SoundManager::Instance().Load("../Assets/audio/yay.ogg", "yay", SoundType::SOUND_SFX);
