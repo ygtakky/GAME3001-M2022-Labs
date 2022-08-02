@@ -34,6 +34,10 @@ void PlayScene::Draw()
 			auto offset = glm::vec2(obstacle->GetWidth() * 0.5f, obstacle->GetHeight() * 0.5f);
 			Util::DrawRect(obstacle->GetTransform()->position - offset, obstacle->GetWidth(), obstacle->GetHeight());
 		}
+
+		// Radius
+		auto detected = m_pStarShip->GetTree()->GetPlayerDetectedNode()->GetDetected();
+		Util::DrawCircle(m_pStarShip->GetTransform()->position, 300.0f, detected ? glm::vec4(0, 1, 0, 1) : glm::vec4(1, 0, 0, 1));
 	}
 
 	SDL_SetRenderDrawColor(Renderer::Instance().GetRenderer(), 255, 255, 255, 255);
@@ -43,9 +47,19 @@ void PlayScene::Update()
 {
 	UpdateDisplayList();
 
-
-
+	// Sets up Ranged Combat Enemy
+	m_pStarShip->GetTree()->GetEnemyHealthNode()->SetHealth(m_pStarShip->GetHealth() > 25);
+	m_pStarShip->GetTree()->GetEnemyHitNode()->SetIsHit(false);
 	m_pStarShip->CheckAgentLOSToTarget(m_pStarShip, m_pTarget, m_pObstacles);
+
+	// Distance Check between Starship and Target for Detection Radius
+	float distance = Util::Distance(m_pStarShip->GetTransform()->position, m_pTarget->GetTransform()->position);
+
+	// Radius detection...just outside of LOS range (around 300 px)
+	m_pStarShip->GetTree()->GetPlayerDetectedNode()->SetDetected(distance < 300);
+
+	// Within LOS distance...but not too close (optimum firing range)
+	m_pStarShip->GetTree()->GetRangedCombatNode()->SetIsWithinCombatRange(distance >= 200 && distance <= 350);
 
 	switch(m_LOSMode)
 	{
@@ -177,6 +191,22 @@ void PlayScene::GetKeyboardInput()
 	if (EventManager::Instance().IsKeyDown(SDL_SCANCODE_2))
 	{
 		Game::Instance().ChangeSceneState(SceneState::END);
+	}
+
+	if(EventManager::Instance().KeyPressed(SDL_SCANCODE_K))
+	{
+		m_pStarShip->TakeDamage(25); // StarShip takes damage
+		m_pStarShip->GetTree()->GetEnemyHitNode()->SetIsHit(true);
+		std::cout << "StarShip at: " << m_pStarShip->GetHealth() << "%. " << std::endl;
+	}
+
+	if (EventManager::Instance().KeyPressed(SDL_SCANCODE_R))
+	{
+		m_pStarShip->SetHealth(100); // Reset health
+		m_pStarShip->GetTree()->GetEnemyHitNode()->SetIsHit(false);
+		m_pStarShip->GetTree()->GetPlayerDetectedNode()->SetDetected(false);
+
+		std::cout << "Conditions have been Reset" << std::endl;
 	}
 }
 

@@ -35,6 +35,15 @@ public:
 	// New for Lab 7 part 2
 	void Patrol() override;
 	void MoveToPlayer() override;
+	// New for Lab 7 part 3
+	void Flee() override;
+	void MoveToLOS() override;
+	void MoveToRange() override;
+	void MoveToCover() override;
+	void WaitBehindCover() override;
+	void Attack() override;
+
+
 	DecisionTree* GetTree() const;
 
 private:
