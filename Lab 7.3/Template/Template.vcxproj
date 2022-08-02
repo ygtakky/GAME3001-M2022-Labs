@@ -174,6 +174,8 @@
     <ClCompile Include="..\src\CloseCombatEnemy.cpp" />
     <ClCompile Include="..\src\CollisionManager.cpp" />
     <ClCompile Include="..\src\DecisionTree.cpp" />
+    <ClCompile Include="..\src\EnemyHealthCondition.cpp" />
+    <ClCompile Include="..\src\EnemyHitCondition.cpp" />
     <ClCompile Include="..\src\FleeAction.cpp" />
     <ClCompile Include="..\src\ImGuiWindowFrame.cpp" />
     <ClCompile Include="..\src\LOSCondition.cpp" />
@@ -187,6 +189,7 @@
     <ClCompile Include="..\src\PathConnection.cpp" />
     <ClCompile Include="..\src\PathNode.cpp" />
     <ClCompile Include="..\src\PatrolAction.cpp" />
+    <ClCompile Include="..\src\PlayerDetectedCondition.cpp" />
     <ClCompile Include="..\src\RadiusCondition.cpp" />
     <ClCompile Include="..\src\RangedCombatCondition.cpp" />
     <ClCompile Include="..\src\RangedCombatEnemy.cpp" />
@@ -238,6 +241,8 @@
     <ClInclude Include="..\src\ConditionNode.h" />
     <ClInclude Include="..\src\Config.h" />
     <ClInclude Include="..\src\DecisionTree.h" />
+    <ClInclude Include="..\src\EnemyHealthCondition.h" />
+    <ClInclude Include="..\src\EnemyHitCondition.h" />
     <ClInclude Include="..\src\FleeAction.h" />
     <ClInclude Include="..\src\Heuristic.h" />
     <ClInclude Include="..\src\ImGuiWindowFrame.h" />
@@ -255,6 +260,7 @@
     <ClInclude Include="..\src\PathConnection.h" />
     <ClInclude Include="..\src\PathNode.h" />
     <ClInclude Include="..\src\PatrolAction.h" />
+    <ClInclude Include="..\src\PlayerDetectedCondition.h" />
     <ClInclude Include="..\src\RadiusCondition.h" />
     <ClInclude Include="..\src\RangedCombatCondition.h" />
     <ClInclude Include="..\src\RangedCombatEnemy.h" />
