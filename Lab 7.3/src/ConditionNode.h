@@ -9,7 +9,6 @@ class ConditionNode : public TreeNode
 public:
 	ConditionNode() { m_isLeaf = false; }
 	virtual ~ConditionNode() = default;
-
 	virtual bool Condition() = 0; // Condition Specialization
 };
 

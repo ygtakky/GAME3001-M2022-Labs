@@ -199,7 +199,7 @@ bool Agent::CheckAgentLOSToTarget(Agent* agent, DisplayObject* target_object, co
 
 		has_LOS = CollisionManager::LOSCheck(agent, GetMiddleLOSEndPoint(), contact_list, target_object);
 	}
-	SetHasLOS(has_LOS);
+	agent->SetHasLOS(has_LOS);
 
 	return has_LOS;
 }

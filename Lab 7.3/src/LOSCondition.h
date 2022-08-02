@@ -7,15 +7,10 @@
 class LOSCondition : public ConditionNode
 {
 public:
-	LOSCondition(bool LOS = false);
+	LOSCondition();
 	virtual ~LOSCondition();
 
-	// Getters and Setters
-	void SetLOS(bool state);
-
 	virtual bool Condition() override;
-private:
-	bool m_hasLOS;
 };
 
 #endif /* defined (__LOS_CONDITION__) */
