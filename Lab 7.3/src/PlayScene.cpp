@@ -329,7 +329,7 @@ void PlayScene::m_clearNodes()
 void PlayScene::Start()
 {
 	// Set GUI Title
-	m_guiTitle = "Lab 7 - Part 2";
+	m_guiTitle = "Lab 7 - Part 3";
 
 	// Setup a few more fields
 	m_LOSMode = LOSMode::TARGET;
@@ -347,8 +347,8 @@ void PlayScene::Start()
 	m_pTarget->GetTransform()->position = glm::vec2(500.0f, 300.0f);
 	AddChild(m_pTarget, 3);
 
-	m_pStarShip = new CloseCombatEnemy();
-	//m_pStarShip = new RangedCombatEnemy();
+	//m_pStarShip = new CloseCombatEnemy();
+	m_pStarShip = new RangedCombatEnemy();
 	m_pStarShip->GetTransform()->position = glm::vec2(400.0f, 40.0f);
 	AddChild(m_pStarShip, 4);
 

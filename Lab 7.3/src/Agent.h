@@ -65,6 +65,10 @@ public:
 	virtual void MoveToPlayer() {}
 	virtual void MoveToRange() {}
 	virtual void Patrol() {}
+	// new for Lab 7 part 3
+	virtual void Flee() {}
+	virtual void MoveToCover() {}
+	virtual void WaitBehindCover() {}
 
 private:
 	void ChangeDirection(); // From scalar to vec2.
