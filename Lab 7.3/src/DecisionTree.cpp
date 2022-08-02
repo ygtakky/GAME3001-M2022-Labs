@@ -62,6 +62,36 @@ std::vector<TreeNode*>& DecisionTree::GetTree()
 	return m_treeNodeList;
 }
 
+EnemyHealthCondition* DecisionTree::GetEnemyHealthNode() const
+{
+	return m_EnemyHealthNode;
+}
+
+EnemyHitCondition* DecisionTree::GetEnemyHitNode() const
+{
+	return m_EnemyHitNode;
+}
+
+PlayerDetectedCondition* DecisionTree::GetPlayerDetectedNode() const
+{
+	return m_PlayerDetectedNode;
+}
+
+void DecisionTree::SetEnemyHealthNode(EnemyHealthCondition* node)
+{
+	m_EnemyHealthNode = node;
+}
+
+void DecisionTree::SetEnemyHitNode(EnemyHitCondition* node)
+{
+	m_EnemyHitNode = node;
+}
+
+void DecisionTree::SetPlayerDetectedNode(PlayerDetectedCondition* node)
+{
+	m_PlayerDetectedNode = node;
+}
+
 void DecisionTree::SetLOSNode(LOSCondition* node)
 {
 	m_LOSNode = node;

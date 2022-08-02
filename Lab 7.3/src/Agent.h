@@ -37,7 +37,7 @@ public:
 	ActionState GetActionState() const;
 
 	// New For Lab 7 Part 3
-	int GetHealth();
+	int GetHealth() const;
 	void SetHealth(int value);
 	void TakeDamage(int value);
 
