@@ -76,6 +76,21 @@ ActionState Agent::GetActionState() const
 	return m_state;
 }
 
+int Agent::GetHealth() const
+{
+	return m_health;
+}
+
+void Agent::SetHealth(const int value)
+{
+	m_health = value;
+}
+
+void Agent::TakeDamage(const int value)
+{
+	m_health -= value;
+}
+
 void Agent::SetTargetPosition(const glm::vec2 new_position)
 {
 	m_targetPosition = new_position;
