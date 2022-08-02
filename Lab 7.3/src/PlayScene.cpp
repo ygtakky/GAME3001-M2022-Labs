@@ -43,6 +43,8 @@ void PlayScene::Update()
 {
 	UpdateDisplayList();
 
+
+
 	m_pStarShip->CheckAgentLOSToTarget(m_pStarShip, m_pTarget, m_pObstacles);
 
 	switch(m_LOSMode)

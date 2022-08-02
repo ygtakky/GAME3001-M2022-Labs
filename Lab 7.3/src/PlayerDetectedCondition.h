@@ -7,7 +7,7 @@
 class PlayerDetectedCondition : public ConditionNode
 {
 public:
-	PlayerDetectedCondition(bool detected = false);
+	PlayerDetectedCondition(Agent* agent = nullptr, bool detected = false);
 	virtual ~PlayerDetectedCondition();
 
 	// Getters and Setters

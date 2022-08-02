@@ -2,7 +2,8 @@
 
 #include <iostream>
 
-MoveToRangeAction::MoveToRangeAction()
+MoveToRangeAction::MoveToRangeAction(Agent* agent)
+	:ActionNode(agent)
 {
 	m_name = "Move To Range Action";
 }

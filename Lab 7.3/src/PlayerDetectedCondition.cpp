@@ -1,6 +1,7 @@
 #include "PlayerDetectedCondition.h"
 
-PlayerDetectedCondition::PlayerDetectedCondition(const bool detected)
+PlayerDetectedCondition::PlayerDetectedCondition(Agent* agent, const bool detected)
+	:ConditionNode(agent)
 {
 	m_name = "Player Detected Condition";
 	SetDetected(detected);

@@ -7,7 +7,7 @@
 class RangedCombatCondition : public ConditionNode
 {
 public:
-	RangedCombatCondition(bool within_combat_range = false);
+	RangedCombatCondition(Agent* agent = nullptr, bool within_combat_range = false);
 	virtual ~RangedCombatCondition();
 
 	// Getters and Setters
@@ -15,7 +15,7 @@ public:
 
 	virtual bool Condition() override;
 private:
-	bool m_isWithinCombatRange;
+	bool m_isWithinCombatRange{};
 };
 
 #endif /* defined (__RANGED_COMBAT_CONDITION__) */

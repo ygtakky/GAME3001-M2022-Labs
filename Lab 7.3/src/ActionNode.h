@@ -8,7 +8,7 @@
 class ActionNode : public TreeNode
 {
 public:
-	ActionNode() { m_isLeaf = true; }
+	ActionNode(Agent* agent = nullptr): TreeNode(agent) { m_isLeaf = true; }
 	virtual ~ActionNode() = default;
 	virtual void Action() = 0; // abstract method (function) -> Specialization
 };

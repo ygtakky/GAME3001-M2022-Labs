@@ -2,7 +2,8 @@
 
 #include <iostream>
 
-AttackAction::AttackAction()
+AttackAction::AttackAction(Agent* agent)
+	:ActionNode(agent)
 {
 	m_name = "Attack Action";
 }

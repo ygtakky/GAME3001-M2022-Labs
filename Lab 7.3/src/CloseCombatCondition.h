@@ -7,7 +7,7 @@
 class CloseCombatCondition : public ConditionNode
 {
 public:
-	CloseCombatCondition(bool within_combat_range = false);
+	CloseCombatCondition(Agent* agent = nullptr, bool within_combat_range = false);
 	virtual ~CloseCombatCondition();
 
 	// Getters and Setters
@@ -15,7 +15,7 @@ public:
 
 	virtual bool Condition() override;
 private:
-	bool m_isWithinCombatRange;
+	bool m_isWithinCombatRange{};
 };
 
 #endif /* defined (__CLOSE_COMBAT_CONDITION__) */

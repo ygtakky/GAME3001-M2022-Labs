@@ -1,6 +1,7 @@
 #include "RangedCombatCondition.h"
 
-RangedCombatCondition::RangedCombatCondition(const bool within_combat_range)
+RangedCombatCondition::RangedCombatCondition(Agent* agent, const bool within_combat_range)
+	:ConditionNode(agent)
 {
 	m_name = "Ranged Combat Condition";
 	SetIsWithinCombatRange(within_combat_range);

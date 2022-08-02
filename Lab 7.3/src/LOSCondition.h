@@ -7,7 +7,7 @@
 class LOSCondition : public ConditionNode
 {
 public:
-	LOSCondition();
+	LOSCondition(Agent* agent = nullptr);
 	virtual ~LOSCondition();
 
 	virtual bool Condition() override;

@@ -7,7 +7,7 @@
 class EnemyHealthCondition : public ConditionNode
 {
 public:
-	EnemyHealthCondition(bool healthy = true);
+	EnemyHealthCondition(Agent* agent = nullptr, bool healthy = true);
 	virtual ~EnemyHealthCondition();
 
 	// Getters and Setters
@@ -15,7 +15,7 @@ public:
 
 	virtual bool Condition() override;
 private:
-	bool m_healthy;
+	bool m_healthy{};
 };
 
 #endif /* defined (__ENEMY_HEALTH_CONDITION__) */

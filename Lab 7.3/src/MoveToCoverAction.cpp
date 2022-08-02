@@ -2,7 +2,8 @@
 
 #include <iostream>
 
-MoveToCoverAction::MoveToCoverAction()
+MoveToCoverAction::MoveToCoverAction(Agent* agent)
+	:ActionNode(agent)
 {
 	m_name = "Move To Cover Action";
 }

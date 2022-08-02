@@ -2,7 +2,8 @@
 
 #include <iostream>
 
-FleeAction::FleeAction()
+FleeAction::FleeAction(Agent* agent)
+	:ActionNode(agent)
 {
 	m_name = "Flee Action";
 }

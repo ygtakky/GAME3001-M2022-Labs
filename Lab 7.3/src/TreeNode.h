@@ -7,10 +7,11 @@
 
 struct TreeNode
 {
-	TreeNode()
+	TreeNode(Agent* agent = nullptr)
 	{
-		m_agent = nullptr;
+		m_agent = agent;
 	}
+
 	virtual ~TreeNode() = default;
 
 	std::string m_name;

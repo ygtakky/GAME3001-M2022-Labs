@@ -2,7 +2,8 @@
 
 #include <iostream>
 
-PatrolAction::PatrolAction()
+PatrolAction::PatrolAction(Agent* agent)
+	:ActionNode(agent)
 {
 	m_name = "Patrol Action";
 }

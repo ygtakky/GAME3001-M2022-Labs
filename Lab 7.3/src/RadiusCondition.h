@@ -7,7 +7,7 @@
 class RadiusCondition : public ConditionNode
 {
 public:
-	RadiusCondition(bool within_radius = false);
+	RadiusCondition(Agent* agent = nullptr, bool within_radius = false);
 	virtual ~RadiusCondition();
 
 	// Getters and Setters
@@ -15,7 +15,7 @@ public:
 
 	virtual bool Condition() override;
 private:
-	bool m_isWithinRadius;
+	bool m_isWithinRadius{};
 };
 
 #endif /* defined (__RADIUS_CONDITION__) */

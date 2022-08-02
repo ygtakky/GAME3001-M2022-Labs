@@ -7,7 +7,7 @@
 class EnemyHitCondition : public ConditionNode
 {
 public:
-	EnemyHitCondition(bool hit = false);
+	EnemyHitCondition(Agent* agent = nullptr, bool hit = false);
 	virtual ~EnemyHitCondition();
 
 	// Getters and Setters
@@ -15,7 +15,7 @@ public:
 
 	virtual bool Condition() override;
 private:
-	bool m_isHit;
+	bool m_isHit{};
 };
 
 #endif /* defined (__ENEMY_HIT_CONDITION__) */
