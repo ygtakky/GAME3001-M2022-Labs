@@ -15,7 +15,7 @@
 RangedCombatEnemy::RangedCombatEnemy() : m_maxSpeed(20.0f),
                                          m_turnRate(5.0f), m_accelerationRate(2.0f)
 {
-	TextureManager::Instance().Load("../Assets/textures/reliant_small.png","ranged_enemy");
+	TextureManager::Instance().Load("../Assets/textures/d7_small.png","ranged_enemy");
 
 	const auto size = TextureManager::Instance().GetTextureSize("ranged_enemy");
 	SetWidth(static_cast<int>(size.x));
