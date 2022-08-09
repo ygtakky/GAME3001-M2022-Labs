@@ -193,6 +193,15 @@ void PlayScene::GetKeyboardInput()
 		Game::Instance().ChangeSceneState(SceneState::END);
 	}
 
+	if(EventManager::Instance().KeyPressed(SDL_SCANCODE_F))
+	{
+		// Torpedo Will Fire Here
+		m_pTorpedoes.push_back(new Torpedo(5.0f)); // instantiate a torpedo and add it to the vector
+		m_pTorpedoes.back()->GetTransform()->position = m_pTarget->GetTransform()->position; // Set the spawn point
+		SoundManager::Instance().PlaySound("torpedo"); // Play the torpedo sound
+		AddChild(m_pTorpedoes.back(), 2); // adds the torpedo to the scene
+	}
+
 	if(EventManager::Instance().KeyPressed(SDL_SCANCODE_K))
 	{
 		m_pStarShip->TakeDamage(25); // StarShip takes damage
@@ -361,7 +370,7 @@ void PlayScene::m_clearNodes()
 void PlayScene::Start()
 {
 	// Set GUI Title
-	m_guiTitle = "Lab 7 - Part 3";
+	m_guiTitle = "Lab 8";
 
 	// Setup a few more fields
 	m_LOSMode = LOSMode::TARGET;
@@ -395,6 +404,7 @@ void PlayScene::Start()
 	// Pre-load sounds
 	SoundManager::Instance().Load("../Assets/audio/yay.ogg", "yay", SoundType::SOUND_SFX);
 	SoundManager::Instance().Load("../Assets/audio/thunder.ogg", "thunder", SoundType::SOUND_SFX);
+	SoundManager::Instance().Load("../Assets/audio/torpedo.ogg", "torpedo", SoundType::SOUND_SFX);
 
 	// Pre-load Music
 	SoundManager::Instance().Load("../Assets/audio/Klingon.mp3", "klingon", SoundType::SOUND_MUSIC);
