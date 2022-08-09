@@ -389,7 +389,7 @@ void PlayScene::Start()
 	AddChild(m_pTarget, 3);
 
 	//m_pStarShip = new CloseCombatEnemy();
-	m_pStarShip = new RangedCombatEnemy();
+	m_pStarShip = new RangedCombatEnemy(this);
 	m_pStarShip->GetTransform()->position = glm::vec2(400.0f, 40.0f);
 	AddChild(m_pStarShip, 4);
 
@@ -405,6 +405,7 @@ void PlayScene::Start()
 	SoundManager::Instance().Load("../Assets/audio/yay.ogg", "yay", SoundType::SOUND_SFX);
 	SoundManager::Instance().Load("../Assets/audio/thunder.ogg", "thunder", SoundType::SOUND_SFX);
 	SoundManager::Instance().Load("../Assets/audio/torpedo.ogg", "torpedo", SoundType::SOUND_SFX);
+	SoundManager::Instance().Load("../Assets/audio/torpedo_k.ogg", "torpedo_k", SoundType::SOUND_SFX);
 
 	// Pre-load Music
 	SoundManager::Instance().Load("../Assets/audio/Klingon.mp3", "klingon", SoundType::SOUND_MUSIC);
@@ -415,6 +416,26 @@ void PlayScene::Start()
 
 	/* DO NOT REMOVE */
 	ImGuiWindowFrame::Instance().SetGuiFunction([this] { GUI_Function(); });
+}
+
+void PlayScene::SpawnEnemyTorpedo()
+{
+	// Set Spawn Point (front of the d7)
+	glm::vec2 spawn_point = m_pStarShip->GetTransform()->position + m_pStarShip->GetCurrentDirection() * 30.0f;
+
+	// Set Direction of the Torpedo (normalized - unit vector)
+	glm::vec2 torpedo_direction = Util::Normalize(m_pTarget->GetTransform()->position - spawn_point);
+
+	// Spawn the Torpedo
+	m_pTorpedoesK.push_back(new TorpedoK(5.0f, torpedo_direction)); // instantiate a torpedo and add it to the vector
+	m_pTorpedoesK.back()->GetTransform()->position = spawn_point; // Set the spawn point
+	SoundManager::Instance().PlaySound("torpedo_k"); // Play the torpedo sound
+	AddChild(m_pTorpedoesK.back(), 2); // adds the torpedo to the scene
+}
+
+Target* PlayScene::GetTarget() const
+{
+	return m_pTarget;
 }
 
 void PlayScene::GUI_Function()

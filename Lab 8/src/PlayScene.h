@@ -11,6 +11,7 @@
 #include "CloseCombatEnemy.h"
 #include "RangedCombatEnemy.h"
 #include "Torpedo.h"
+#include "TorpedoK.h"
 
 class PlayScene : public Scene
 {
@@ -24,6 +25,10 @@ public:
 	virtual void Clean() override;
 	virtual void HandleEvents() override;
 	virtual void Start() override;
+
+	// New For Lab 8
+	void SpawnEnemyTorpedo();
+	Target* GetTarget() const;
 private:
 	// IMGUI Function
 	void GUI_Function();
@@ -47,6 +52,7 @@ private:
 
 	//New for Lab 8
 	std::vector<Torpedo*> m_pTorpedoes;
+	std::vector<TorpedoK*> m_pTorpedoesK;
 
 	std::vector<Obstacle*> m_pObstacles;
 

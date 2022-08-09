@@ -8,7 +8,7 @@
 class RangedCombatEnemy final : public Agent
 {
 public:
-	RangedCombatEnemy();
+	RangedCombatEnemy(Scene* scene);
 	~RangedCombatEnemy() override;
 
 	// Inherited via GameObject
@@ -65,6 +65,11 @@ private:
 	// New For Lab 7 part 2
 	DecisionTree* m_tree;
 	void m_buildTree();
+
+	// new for Lab 8
+	int m_fireCounter; // number of frames that have elapsed
+	int m_fireCounterMax; // frame delay;
+	Scene* m_pScene;
 };
 
 
