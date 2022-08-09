@@ -195,6 +195,7 @@
     <ClCompile Include="..\src\RangedCombatEnemy.cpp" />
     <ClCompile Include="..\src\Sprite.cpp" />
     <ClCompile Include="..\src\Starship.cpp" />
+    <ClCompile Include="..\src\Torpedo.cpp" />
     <ClCompile Include="..\src\UIControl.cpp" />
     <ClCompile Include="..\src\DisplayObject.cpp" />
     <ClCompile Include="..\src\EndScene.cpp" />
@@ -270,6 +271,8 @@
     <ClInclude Include="..\src\TileNeighbour.h" />
     <ClInclude Include="..\src\TileStatus.h" />
     <ClInclude Include="..\src\TileType.h" />
+    <ClInclude Include="..\src\Torpedo.h" />
+    <ClInclude Include="..\src\TorpedoAnimationState.h" />
     <ClInclude Include="..\src\TreeNode.h" />
     <ClInclude Include="..\src\TreeNodeType.h" />
     <ClInclude Include="..\src\UIControl.h" />
